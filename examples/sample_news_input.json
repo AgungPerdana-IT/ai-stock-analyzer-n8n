@@ -1,0 +1,56 @@
+{
+  "fetch_date": "2025-01-15",
+  "fetch_time": "07:15 WIB",
+  "stocks_analyzed": ["BBCA", "TLKM", "GOTO"],
+  "news_items": [
+    {
+      "stock_code": "BBCA",
+      "company_name": "Bank Central Asia Tbk",
+      "sector": "Perbankan",
+      "articles": [
+        {
+          "title": "BCA Catat Pertumbuhan Kredit 12,3% di Q4 2024, Melampaui Estimasi",
+          "source": "Bisnis.com",
+          "published_at": "2025-01-15T06:00:00+07:00",
+          "summary": "Bank Central Asia (BCA) mencatatkan pertumbuhan kredit sebesar 12,3% secara tahunan pada kuartal keempat 2024, melampaui estimasi konsensus analis yang berada di kisaran 10-11%.",
+          "url": "https://finansial.bisnis.com/..."
+        },
+        {
+          "title": "Laba Bersih BBCA Naik 14% YoY Menjadi Rp 48,6 Triliun",
+          "source": "CNBC Indonesia",
+          "published_at": "2025-01-15T05:30:00+07:00",
+          "summary": "PT Bank Central Asia Tbk (BBCA) membukukan laba bersih sebesar Rp 48,6 triliun sepanjang 2024, tumbuh 14% dibandingkan periode yang sama tahun lalu.",
+          "url": "https://www.cnbcindonesia.com/..."
+        }
+      ]
+    },
+    {
+      "stock_code": "TLKM",
+      "company_name": "Telkom Indonesia Tbk",
+      "sector": "Telekomunikasi",
+      "articles": [
+        {
+          "title": "Telkom Luncurkan Layanan AI Enterprise untuk Korporasi",
+          "source": "Kompas.com",
+          "published_at": "2025-01-15T07:00:00+07:00",
+          "summary": "PT Telkom Indonesia Tbk resmi meluncurkan platform layanan AI untuk segmen korporasi, menargetkan 500 perusahaan besar di Indonesia pada tahun pertama.",
+          "url": "https://tekno.kompas.com/..."
+        }
+      ]
+    },
+    {
+      "stock_code": "GOTO",
+      "company_name": "GoTo Gojek Tokopedia Tbk",
+      "sector": "Teknologi",
+      "articles": [
+        {
+          "title": "GOTO Klaim Catat EBITDA Positif untuk Pertama Kali di Q4 2024",
+          "source": "Katadata",
+          "published_at": "2025-01-15T06:45:00+07:00",
+          "summary": "GoTo Group mengumumkan bahwa perusahaan berhasil mencatat adjusted EBITDA positif untuk pertama kalinya pada Q4 2024, menandai tonggak penting dalam perjalanan menuju profitabilitas.",
+          "url": "https://katadata.co.id/..."
+        }
+      ]
+    }
+  ]
+}

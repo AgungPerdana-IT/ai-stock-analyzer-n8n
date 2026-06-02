@@ -1,0 +1,20 @@
+# API Keys & Secrets
+.env
+.env.local
+*.key
+secrets.json
+
+# n8n local files
+.n8n/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
