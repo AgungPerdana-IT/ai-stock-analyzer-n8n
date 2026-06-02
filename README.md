@@ -107,7 +107,7 @@ ai-stock-analyzer-n8n/
 
 ```bash
 # 1. Clone repository ini
-git clone https://github.com/USERNAME/ai-stock-analyzer-n8n.git
+git clone https://github.com/AgungPerdana-IT/ai-stock-analyzer-n8n.git
 cd ai-stock-analyzer-n8n
 
 # 2. Buka n8n kamu
@@ -212,7 +212,7 @@ Semua konfigurasi dilakukan melalui **n8n Environment Variables** atau langsung 
 
 ## 🤝 Kontribusi
 
-Pull request dan feedback sangat welcome! Kalau kamu punya ide untuk memperbaiki prompt atau workflow, silakan buka [Issue](https://github.com/USERNAME/ai-stock-analyzer-n8n/issues) dulu.
+Pull request dan feedback sangat welcome! Kalau kamu punya ide untuk memperbaiki prompt atau workflow, silakan buka [Issue](https://github.com/AgungPerdana-IT/ai-stock-analyzer-n8n/issues) dulu.
 
 ---
 
@@ -229,9 +229,12 @@ Pull request dan feedback sangat welcome! Kalau kamu punya ide untuk memperbaiki
 ---
 
 <div align="center">
-  <p>Dibuat dengan ☕ oleh <strong>@USERNAME</strong></p>
-  <p>
-    <a href="https://linkedin.com/in/USERNAME">LinkedIn</a> •
-    <a href="https://github.com/USERNAME">GitHub</a>
-  </p>
+## 👤 Author
+
+**[Agung Perdana]**
+QA Engineer | Manual & Automation Testing
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=flat-square&logo=linkedin)](https://linkedin.com/in/agung-perdana-it)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat-square&logo=github)](https://github.com/AgungPerdana-IT)
+
 </div>
