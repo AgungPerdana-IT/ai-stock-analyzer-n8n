@@ -54,31 +54,31 @@ $225 million strategic investment from Warburg Pincus.
 ## Pesan Telegram yang Dikirim
 
 ```
-📊 ANALISIS PASAR SAHAM AS
-📅 02 June 2026 | 09:30 ET
+ANALISIS PASAR SAHAM AS
+02 June 2026 | 09:30 ET
 
 ━━━━━━━━━━━━━━━━━━━━
 
-🌐 Sentimen Pasar: POSITIF
-🎯 Confidence: HIGH
+Sentimen Pasar: POSITIF
+Confidence: HIGH
 
-📝 Ringkasan:
+Ringkasan:
 OceanFirst Financial (OCFC) berhasil menyelesaikan merger dengan 
 Flushing Financial sekaligus mengamankan investasi strategis senilai 
 $225 juta dari Warburg Pincus, menandai ekspansi signifikan di sektor 
 perbankan regional AS.
 
-🔥 TOP 3 Saham Terdampak:
+TOP 3 Saham Terdampak:
 1. $OCFC — positif | Merger selesai + investasi $225M dari Warburg Pincus
 2. $FLNC — positif | Pemegang saham dapat premium akuisisi
 3. $KRE  — positif | Sentimen positif sektor perbankan regional AS
 
-💡 Saran Tindakan: BELI
+Saran Tindakan: BELI
 Penyelesaian merger menghilangkan ketidakpastian regulasi, dan 
 investasi Warburg Pincus mengkonfirmasi valuasi yang atraktif.
 
 ━━━━━━━━━━━━━━━━━━━━
-⚠️ Bukan saran investasi. DYOR.
+Bukan saran investasi. DYOR.
 ```
 
 ---

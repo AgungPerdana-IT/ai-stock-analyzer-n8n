@@ -1,4 +1,4 @@
-# 📊 Contoh Output Nyata — Pasar Saham AS
+# Contoh Output Nyata — Pasar Saham AS
 
 Kumpulan contoh output dari sistem yang sudah berjalan. Digunakan untuk validasi kualitas prompt dan sebagai referensi.
 
@@ -92,7 +92,7 @@ Kumpulan contoh output dari sistem yang sudah berjalan. Digunakan untuk validasi
 - `confidence_level` bervariasi — tidak semua HIGH
 - Analisis airlines (UAL, ALK) menunjukkan model memahami hubungan kausal harga minyak → biaya operasional maskapai
 
-### Area Perbaikan 🔧
+### Area Perbaikan 
 - Kadang `top_3_saham` masih terlalu fokus ke satu sektor
 - Perlu tambah constraint agar ticker yang direkomendasikan lebih dikenal (large cap)
 - `ringkasan` kadang melebihi 3 kalimat

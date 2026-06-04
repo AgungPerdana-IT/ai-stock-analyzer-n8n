@@ -12,7 +12,7 @@ Dokumentasi detail setiap node dalam workflow n8n.
 
 ---
 
-## Node 1: Schedule Trigger ⏰
+## Node 1: Schedule Trigger 
 
 **Fungsi:** Pemicu otomatis — memulai seluruh workflow sesuai jadwal.
 
@@ -26,7 +26,7 @@ Dokumentasi detail setiap node dalam workflow n8n.
 
 ---
 
-## Node 2: HTTP Request (NewsAPI) 🌐
+## Node 2: HTTP Request (NewsAPI) 
 
 **Fungsi:** Mengambil berita pasar saham AS terbaru dari NewsAPI.
 
@@ -86,7 +86,7 @@ return [{ json: { news_text: cleanText, total_articles: articles.length } }];
 
 ---
 
-## Node 4: HTTP Request1 (Google Gemini) 🧠
+## Node 4: HTTP Request1 (Google Gemini) 
 
 **Fungsi:** Mengirim berita ke Gemini untuk dianalisis menggunakan Self-Critique Prompting.
 
@@ -126,7 +126,7 @@ return [{ json: analysis }];
 
 ---
 
-## Node 6: Send a Text Message (Telegram) ✈️
+## Node 6: Send a Text Message (Telegram) 
 
 **Fungsi:** Memformat dan mengirim hasil analisis ke Telegram bot.
 

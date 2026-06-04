@@ -1,4 +1,4 @@
-# 🧠 Prompt Engineering — Dokumentasi & Strategi
+# Prompt Engineering — Dokumentasi & Strategi
 
 Dokumen ini menjelaskan bagaimana dan mengapa prompt dirancang seperti ini.
 
@@ -89,4 +89,3 @@ Analisis satu langkah cenderung bias ke sentimen berita yang paling dominan. Sel
 
 - [ ] Few-shot examples — tambah 2-3 contoh analisis nyata di prompt
 - [ ] Pisahkan system prompt dan user prompt untuk kontrol lebih baik
-- [ ] Versi untuk saham Indonesia (BEI) dengan konteks OJK dan rupiah
