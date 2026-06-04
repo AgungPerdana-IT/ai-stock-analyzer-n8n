@@ -72,7 +72,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=AQ.Ab8RN6K7hFzzQy-lpzmM9SCUH7CS4Zobc8W3f8VWl0wKmq0wXw",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=[YOU_API_KEY]",
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
@@ -92,7 +92,7 @@
     },
     {
       "parameters": {
-        "url": "https://newsapi.org/v2/everything?q=stock+market+US&language=en&sortBy=publishedAt&pageSize=10&apiKey=b266c8cc86194c03a9d7ed4425d558a9",
+        "url": "https://newsapi.org/v2/everything?q=stock+market+US&language=en&sortBy=publishedAt&pageSize=10&apiKey=[YOUR_NEWSAPI_KEY]",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
