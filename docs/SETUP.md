@@ -76,7 +76,7 @@ https://newsapi.org/v2/everything?q=stock+market+US&language=en&sortBy=published
 ### HTTP Request1 Node (Gemini)
 Pastikan URL adalah:
 ```
-https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=GEMINI_KEY_KAMU
+https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=GEMINI_KEY_KAMU
 ```
 
 ### Telegram Node
