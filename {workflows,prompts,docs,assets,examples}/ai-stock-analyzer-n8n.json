@@ -23,7 +23,7 @@
     },
     {
       "parameters": {
-        "chatId": "6488429838",
+        "chatId": "YOUR_CHAT_ID",
         "text": "=📊 *ANALISIS PASAR SAHAM AS* 📅 {{ $now.toFormat('dd MMMM yyyy') }} | 09:30 ET  \n━━━━━━━━━━━━━━━━━━━━ \n🌐 *Sentimen Pasar:* {{ $json.sentimen_pasar.toUpperCase() }}\n🎯 *Confidence:* {{ $json.confidence_level }}\n📝 *Ringkasan:* {{ $json.ringkasan }}\n🔥 *TOP 3 Saham Terdampak:\n*1. ${{ $json.top_3_saham[0].ticker }} — {{ $json.top_3_saham[0].dampak }} | {{ $json.top_3_saham[0].alasan }}\n2. ${{ $json.top_3_saham[1].ticker }} — {{ $json.top_3_saham[1].dampak }} | {{ $json.top_3_saham[1].alasan }}\n3. ${{ $json.top_3_saham[2].ticker }} — {{ $json.top_3_saham[2].dampak }} | {{ $json.top_3_saham[2].alasan }} \n💡 *Saran Tindakan:* {{ $json.saran_tindakan.aksi.toUpperCase() }} {{ $json.saran_tindakan.alasan }} \n ━━━━━━━━━━━━━━━━━━━━ \n⚠️ _Bukan saran investasi. DYOR._",
         "additionalFields": {}
       },
