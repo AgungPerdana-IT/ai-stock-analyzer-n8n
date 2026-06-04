@@ -1,56 +1,49 @@
 {
-  "fetch_date": "2025-01-15",
-  "fetch_time": "07:15 WIB",
-  "stocks_analyzed": ["BBCA", "TLKM", "GOTO"],
-  "news_items": [
+  "fetch_date": "2026-06-02",
+  "fetch_time": "09:15 ET",
+  "source": "NewsAPI",
+  "query": "stock market US",
+  "total_articles": 9,
+  "articles": [
     {
-      "stock_code": "BBCA",
-      "company_name": "Bank Central Asia Tbk",
-      "sector": "Perbankan",
-      "articles": [
-        {
-          "title": "BCA Catat Pertumbuhan Kredit 12,3% di Q4 2024, Melampaui Estimasi",
-          "source": "Bisnis.com",
-          "published_at": "2025-01-15T06:00:00+07:00",
-          "summary": "Bank Central Asia (BCA) mencatatkan pertumbuhan kredit sebesar 12,3% secara tahunan pada kuartal keempat 2024, melampaui estimasi konsensus analis yang berada di kisaran 10-11%.",
-          "url": "https://finansial.bisnis.com/..."
-        },
-        {
-          "title": "Laba Bersih BBCA Naik 14% YoY Menjadi Rp 48,6 Triliun",
-          "source": "CNBC Indonesia",
-          "published_at": "2025-01-15T05:30:00+07:00",
-          "summary": "PT Bank Central Asia Tbk (BBCA) membukukan laba bersih sebesar Rp 48,6 triliun sepanjang 2024, tumbuh 14% dibandingkan periode yang sama tahun lalu.",
-          "url": "https://www.cnbcindonesia.com/..."
-        }
-      ]
+      "source": { "id": null, "name": "GlobeNewswire" },
+      "title": "OceanFirst Financial Corp. Completes Merger with Flushing Financial and $225M Investment from Warburg Pincus",
+      "description": "OceanFirst Financial Corp. (NASDAQ: OCFC) announced the completion of its merger with Flushing Financial Corporation and a $225 million strategic investment from Warburg Pincus.",
+      "content": "RED BANK, N.J., June 01, 2026 -- OceanFirst Financial Corp. (NASDAQ: OCFC), the holding company for OceanFirst Bank N.A., today announced the completion of its previously announced merger with Flushing Financial Corporation and a $225 million strategic investment from Warburg Pincus. [+12407 chars]",
+      "publishedAt": "2026-06-01T10:00:00Z",
+      "url": "https://www.globenewswire.com/news-release/2026/06/01/ocfc-merger"
     },
     {
-      "stock_code": "TLKM",
-      "company_name": "Telkom Indonesia Tbk",
-      "sector": "Telekomunikasi",
-      "articles": [
-        {
-          "title": "Telkom Luncurkan Layanan AI Enterprise untuk Korporasi",
-          "source": "Kompas.com",
-          "published_at": "2025-01-15T07:00:00+07:00",
-          "summary": "PT Telkom Indonesia Tbk resmi meluncurkan platform layanan AI untuk segmen korporasi, menargetkan 500 perusahaan besar di Indonesia pada tahun pertama.",
-          "url": "https://tekno.kompas.com/..."
-        }
-      ]
+      "source": { "id": null, "name": "PRNewswire" },
+      "title": "Arrow Financial Corporation and Adirondack Bancorp Receive OCC Approval for Merger",
+      "description": "Arrow Financial Corporation (NASDAQGS: AROW) and Adirondack Bancorp received OCC regulatory approval to proceed with their planned merger.",
+      "content": "GLENS FALLS, N.Y., June 1, 2026 -- Arrow Financial Corporation (NASDAQGS: AROW) and Adirondack Bancorp, Inc. announced receipt of OCC approval for their merger. [+8554 chars]",
+      "publishedAt": "2026-06-01T09:30:00Z",
+      "url": "https://www.prnewswire.com/news-releases/arow-adirondack-merger"
     },
     {
-      "stock_code": "GOTO",
-      "company_name": "GoTo Gojek Tokopedia Tbk",
-      "sector": "Teknologi",
-      "articles": [
-        {
-          "title": "GOTO Klaim Catat EBITDA Positif untuk Pertama Kali di Q4 2024",
-          "source": "Katadata",
-          "published_at": "2025-01-15T06:45:00+07:00",
-          "summary": "GoTo Group mengumumkan bahwa perusahaan berhasil mencatat adjusted EBITDA positif untuk pertama kalinya pada Q4 2024, menandai tonggak penting dalam perjalanan menuju profitabilitas.",
-          "url": "https://katadata.co.id/..."
-        }
-      ]
+      "source": { "id": null, "name": "Newser" },
+      "title": "Stocks Hit New Records Despite Jump in Oil Prices",
+      "description": "Wall Street appeared unworried about oil price surge. The S&P 500 rose 19.90 points, or 0.3%, to 7,599.96. The Dow Jones Industrial Average rose 46.42 points.",
+      "content": "Despite records being broken, a slight majority of US stocks actually fell, including companies with big fuel bills hurt by higher oil prices. United Airlines lost 2.6%, and Alaska Air Group fell 3.3%. [+2048 chars]",
+      "publishedAt": "2026-06-01T20:00:00Z",
+      "url": "https://www.newser.com/story/stocks-records-oil"
+    },
+    {
+      "source": { "id": null, "name": "9to5Google" },
+      "title": "Anthropic Eyes Going Public as It Files Official Submission to SEC",
+      "description": "Anthropic has submitted official documentation to the SEC to start being publicly traded, beating OpenAI to an IPO.",
+      "content": "Anthropic has announced that the company has submitted official documentation to the SEC to start being publicly traded, beating OpenAI to an IPO. Anthropic's submission to the SEC consists of a confidential S-1 filing. [+1489 chars]",
+      "publishedAt": "2026-06-01T15:00:00Z",
+      "url": "https://9to5google.com/anthropic-ipo-sec-filing"
+    },
+    {
+      "source": { "id": null, "name": "The Times of India" },
+      "title": "Oil Prices Surge as Iran Talks Stall and Supply Concerns Return",
+      "description": "Oil prices moved higher after Iran suspended negotiations with the United States. Brent crude futures rose sharply amid concerns over Strait of Hormuz.",
+      "content": "Oil prices posted strong gains after Iran suspended nuclear talks with the US, raising concerns about crude supply disruptions through the Strait of Hormuz. [+7432 chars]",
+      "publishedAt": "2026-06-01T12:00:00Z",
+      "url": "https://timesofindia.com/oil-iran-talks-stall"
     }
   ]
 }

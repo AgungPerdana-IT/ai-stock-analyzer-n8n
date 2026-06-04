@@ -1,0 +1,179 @@
+{
+  "name": "ai-stock-analyzer-n8n",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9,
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "062513bc-7ae0-4912-8c1c-6e86d5f35b19",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "chatId": "6488429838",
+        "text": "=📊 *ANALISIS PASAR SAHAM AS* 📅 {{ $now.toFormat('dd MMMM yyyy') }} | 09:30 ET  \n━━━━━━━━━━━━━━━━━━━━ \n🌐 *Sentimen Pasar:* {{ $json.sentimen_pasar.toUpperCase() }}\n🎯 *Confidence:* {{ $json.confidence_level }}\n📝 *Ringkasan:* {{ $json.ringkasan }}\n🔥 *TOP 3 Saham Terdampak:\n*1. ${{ $json.top_3_saham[0].ticker }} — {{ $json.top_3_saham[0].dampak }} | {{ $json.top_3_saham[0].alasan }}\n2. ${{ $json.top_3_saham[1].ticker }} — {{ $json.top_3_saham[1].dampak }} | {{ $json.top_3_saham[1].alasan }}\n3. ${{ $json.top_3_saham[2].ticker }} — {{ $json.top_3_saham[2].dampak }} | {{ $json.top_3_saham[2].alasan }} \n💡 *Saran Tindakan:* {{ $json.saran_tindakan.aksi.toUpperCase() }} {{ $json.saran_tindakan.alasan }} \n ━━━━━━━━━━━━━━━━━━━━ \n⚠️ _Bukan saran investasi. DYOR._",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1072,
+        0
+      ],
+      "id": "de9fb1cb-5879-41db-ae41-29882949e7ae",
+      "name": "Send a text message",
+      "webhookId": "4f324a72-4a31-4d92-87f8-eb9158327a21",
+      "credentials": {
+        "telegramApi": {
+          "id": "zFMFPJ8TaGtHFKB7",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst articles = response.articles;\n\nlet newsText = \"\";\n\nfor (let i = 0; i < articles.length; i++) {\n  const article = articles[i];\n  newsText += `BERITA ${i + 1}: `;\n  newsText += `Judul: ${article.title}. `;\n  newsText += `Sumber: ${article.source.name}. `;\n  newsText += `Deskripsi: ${article.description}. `;\n  newsText += `Konten: ${article.content}. `;\n  newsText += ` --- `;\n}\n\n// Escape untuk JSON\nconst cleanText = newsText.replace(/\\\\/g, '').replace(/\"/g, \"'\").replace(/\\n/g, ' ').replace(/\\r/g, ' ');\n\nreturn [{ json: { news_text: cleanText, total_articles: articles.length } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "35232c74-f0bd-4bd2-beac-5ef86ea57490",
+      "name": "Code in JavaScript from News"
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst rawText = response.candidates[0].content.parts[0].text;\n\n// Cari JSON di dalam teks apapun\nconst jsonMatch = rawText.match(/\\{[\\s\\S]*\\}/);\nif (!jsonMatch) throw new Error(\"Tidak ada JSON ditemukan di output Gemini\");\n\nconst analysis = JSON.parse(jsonMatch[0]);\nreturn [{ json: analysis }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        864,
+        0
+      ],
+      "id": "b6c936fb-6c2e-438a-80c7-bd4af3245021",
+      "name": "Code in JavaScript from GEMINI"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=AQ.Ab8RN6K7hFzzQy-lpzmM9SCUH7CS4Zobc8W3f8VWl0wKmq0wXw",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\"contents\":[{\"parts\":[{\"text\":\"Kamu adalah analis saham profesional Wall Street dengan pengalaman 20 tahun.\\n\\nBERITA HARI INI:\\n{{ $json.news_text }}\\n\\nLANGKAH 1 - Buat analisis awal berdasarkan berita di atas.\\nLANGKAH 2 - Kritik analisis kamu sendiri: apa yang kurang akurat, terlalu bias, atau perlu diperbaiki?\\nLANGKAH 3 - Berdasarkan kritik itu, hasilkan OUTPUT FINAL.\\n\\nOUTPUT FINAL harus berupa JSON murni, mulai dengan '{', tanpa teks lain:\\n{\\\"sentimen_pasar\\\":\\\"positif/negatif/netral\\\",\\\"ringkasan\\\":\\\"2-3 kalimat objektif\\\",\\\"top_3_saham\\\":[{\\\"ticker\\\":\\\"XXXX\\\",\\\"dampak\\\":\\\"positif/negatif/netral\\\",\\\"alasan\\\":\\\"alasan spesifik dari berita\\\"}],\\\"saran_tindakan\\\":{\\\"aksi\\\":\\\"beli/jual/wait and see\\\",\\\"alasan\\\":\\\"alasan logis berbasis data\\\"},\\\"confidence_level\\\":\\\"LOW/MEDIUM/HIGH\\\"}\"}]}]}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        656,
+        0
+      ],
+      "id": "5dca3712-8cb4-42a3-8506-d1d2241aac1f",
+      "name": "POST to GEMINI",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "url": "https://newsapi.org/v2/everything?q=stock+market+US&language=en&sortBy=publishedAt&pageSize=10&apiKey=b266c8cc86194c03a9d7ed4425d558a9",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "32deeb6e-9cd7-4740-9380-2f917de1e94e",
+      "name": "GET from NEWS"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "GET from NEWS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript from News": {
+      "main": [
+        [
+          {
+            "node": "POST to GEMINI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript from GEMINI": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "POST to GEMINI": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript from GEMINI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET from NEWS": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript from News",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d1cf6216-6ecd-4b3b-b412-956cacb83ba8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4a05c5f682e1bb2f00154a1e067da9043aa0256ed4033bee755fb854656360b6"
+  },
+  "nodeGroups": [],
+  "id": "4wSwOsS7Tfvy7xg9",
+  "tags": []
+}

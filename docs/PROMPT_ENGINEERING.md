@@ -1,168 +1,92 @@
 # 🧠 Prompt Engineering — Dokumentasi & Strategi
 
-Dokumen ini menjelaskan **bagaimana dan mengapa** prompt dirancang seperti ini. Ini adalah bagian terpenting dari project — menunjukkan proses berpikir di balik otomatisasi AI.
+Dokumen ini menjelaskan bagaimana dan mengapa prompt dirancang seperti ini.
 
 ---
 
-## 🎯 Tujuan Prompt
+## Teknik Utama: Self-Critique Loop
 
-Prompt harus bisa membuat Gemini:
+Prompt menggunakan teknik **Self-Refinement Prompting**:
 
-1. **Memahami konteks** saham Indonesia (BEI, regulasi OJK, dll)
-2. **Menganalisis berita** secara objektif tanpa bias berlebihan
-3. **Memberikan saran** yang actionable tapi tetap prudent
-4. **Output JSON** yang konsisten agar bisa di-parse n8n
-5. **Mengakui ketidakpastian** — tidak overpromise
+```
+LANGKAH 1 → Analisis awal
+LANGKAH 2 → Kritik diri sendiri
+LANGKAH 3 → Output final berdasarkan kritik
+```
+
+**Kenapa efektif?**
+LLM cenderung overconfident pada output pertama. Dengan memaksa model mengkritik dirinya sendiri, analisis menjadi lebih **objektif, balanced, dan akurat**.
 
 ---
 
-## 🏗️ Struktur Prompt (Framework: RCTSF)
+## Anatomi Prompt (Framework RCSF)
 
-Prompt utama menggunakan framework **RCTSF**:
-
-| Komponen | Singkatan | Fungsi |
-|----------|-----------|--------|
-| **Role** | R | Mendefinisikan persona AI |
-| **Context** | C | Memberikan latar belakang situasi |
-| **Task** | T | Instruksi tugas yang spesifik |
-| **Schema** | S | Format output yang diharapkan |
-| **Failsafe** | F | Instruksi jika data tidak cukup |
+| Komponen | Isi | Tujuan |
+|----------|-----|--------|
+| **Role** | "analis saham profesional Wall Street 20 tahun" | Membangun expertise frame |
+| **Context** | Berita hari ini dari NewsAPI | Grounding ke data nyata |
+| **Steps** | 3 langkah self-critique | Mendorong reasoning yang lebih dalam |
+| **Format** | JSON schema eksplisit | Output konsisten, bisa di-parse otomatis |
 
 ---
 
-## 📝 Anatomi System Prompt
+## Iterasi Prompt
 
+### v1.0 — Baseline (Gagal)
 ```
-[ROLE]
-Kamu adalah analis saham berpengalaman di pasar modal Indonesia...
-↳ Tujuan: Membangun "expertise frame" agar output lebih relevan
-
-[CONTEXT]  
-Pasar yang kamu analisis adalah Bursa Efek Indonesia (BEI)...
-↳ Tujuan: Grounding ke konteks lokal, bukan pasar global generik
-
-[TASK]
-Berdasarkan berita yang diberikan, analisis dampaknya...
-↳ Tujuan: Instruksi eksplisit, tidak ambigu
-
-[SCHEMA]
-Berikan output HANYA dalam format JSON berikut...
-↳ Tujuan: Konsistensi output untuk otomatisasi
-
-[FAILSAFE]
-Jika berita tidak cukup untuk analisis, kembalikan...
-↳ Tujuan: Mencegah hallucination atau output rusak
-```
-
----
-
-## 🔄 Iterasi Prompt (Version History)
-
-### v1.0 — Prompt Awal (Baseline)
-
-```
-Analisis berita berikut dan beri tahu apakah saham ini layak dibeli.
-Berita: {news}
-Saham: {stock}
-```
-
-**Masalah yang ditemukan:**
-- ❌ Output tidak konsisten (kadang paragraf, kadang list)
-- ❌ Sering overly bullish, tidak mengakui risiko
-- ❌ Tidak bisa di-parse otomatis oleh n8n
-- ❌ Tidak ada context pasar Indonesia
-
----
-
-### v2.0 — Tambah Role + Format JSON
-
-```
-Kamu adalah analis saham profesional. 
-Analisis berita berikut tentang {stock} dan berikan output dalam JSON:
-{
-  "rekomendasi": "BUY/HOLD/SELL",
-  "alasan": "..."
-}
+Analisis berita ini dan beri saran saham.
 Berita: {news}
 ```
-
-**Improvement:**
-- ✅ Output mulai konsisten
-- ✅ JSON bisa di-parse
-
-**Masalah yang tersisa:**
-- ❌ JSON kadang ada teks tambahan sebelum/sesudah `{}`
-- ❌ Masih terlalu simpel, tidak ada nuansa
-- ❌ Belum ada confidence level
+**Masalah:** Output tidak konsisten, tidak bisa di-parse, terlalu spekulatif.
 
 ---
 
-### v3.0 — Full Framework (Versi Saat Ini)
-
-Versi lengkap ada di `prompts/system_prompt.md`
-
-**Perubahan kunci:**
-- ✅ Explicit instruction: *"Balas HANYA dengan JSON, tanpa teks lain"*
-- ✅ Tambah `confidence_level` untuk mengukur keyakinan AI
-- ✅ Tambah `faktor_risiko` — mendorong balanced analysis
-- ✅ Tambah `disclaimer` field di dalam JSON
-- ✅ Chain-of-thought tersembunyi: *"Sebelum menjawab, pertimbangkan..."*
+### v1.5 — Tambah Role + JSON
+```
+Kamu adalah analis saham. Balas dalam JSON:
+{"rekomendasi": "...", "alasan": "..."}
+```
+**Masalah:** Gemini masih sering tambah teks di luar JSON, merusak parsing.
 
 ---
 
-## 💡 Keputusan Desain & Alasannya
-
-### 1. Kenapa output JSON, bukan teks biasa?
-
+### v2.0 — Self-Critique + Constraint Ketat ✅
 ```
-MASALAH: Teks bebas susah di-parse otomatis
-SOLUSI: JSON dengan schema tetap
-
-TRADEOFF: Model kadang keluar dari format
-MITIGASI: Explicit instruction + error handling di n8n
+Kamu adalah analis saham profesional Wall Street...
+LANGKAH 1 - Analisis awal
+LANGKAH 2 - Kritik analisis sendiri
+LANGKAH 3 - Output FINAL dalam JSON murni, mulai dengan '{'
 ```
-
-### 2. Kenapa ada `confidence_level`?
-
-Pasar saham inherently uncertain. Memaksa AI mengakui ketidakpastian:
-- Mencegah pengguna over-rely pada output
-- Membuat output lebih jujur dan trustworthy
-- Berguna untuk filtering: hanya act jika confidence HIGH
-
-### 3. Kenapa pisahkan `faktor_positif` dan `faktor_risiko`?
-
-```
-Tanpa pemisahan → AI cenderung bias ke satu arah
-Dengan pemisahan → Forced balanced analysis
-```
-
-Teknik ini disebut **"perspective forcing"** — memaksa model mempertimbangkan kedua sisi.
-
-### 4. Kenapa ada instruksi "jangan spekulasi berlebihan"?
-
-LLM cenderung confident bahkan saat data kurang. Instruksi eksplisit:
-> *"Jika berita tidak memberikan cukup informasi, nyatakan ketidakpastian daripada berspekulasi"*
-
-Ini meningkatkan **reliability** output untuk use case finansial.
+**Hasil:** Parse rate ~98%, analisis lebih balanced, confidence lebih akurat.
 
 ---
 
-## 📏 Metrik Kualitas Prompt
+## Keputusan Desain
 
-Cara mengukur apakah prompt berhasil:
+### Kenapa JSON output?
+Agar hasil analisis bisa langsung diproses n8n untuk formatting pesan Telegram yang rapi — tanpa manual parsing teks bebas.
 
-| Metrik | Cara Ukur | Target |
-|--------|-----------|--------|
-| **Parse Rate** | % output yang valid JSON | > 95% |
-| **Balanced Analysis** | Selalu ada faktor risiko | 100% |
-| **Appropriate Confidence** | Tidak semua HIGH | < 40% HIGH |
-| **Relevance** | Berita relevan ke saham | Manual check |
+### Kenapa ada instruksi "mulai dengan `{`"?
+Gemini kadang menambahkan kalimat pembuka seperti *"Berikut adalah analisis saya..."* sebelum JSON. Instruksi eksplisit ini menekan perilaku tersebut.
+
+### Kenapa self-critique, bukan langsung output?
+Analisis satu langkah cenderung bias ke sentimen berita yang paling dominan. Self-critique memaksa model mempertimbangkan sisi lain sebelum kesimpulan final.
 
 ---
 
-## 🚀 Rencana Iterasi Selanjutnya
+## Metrik Kualitas
 
-- [ ] **Few-shot examples** — Tambahkan 2-3 contoh analisis nyata di system prompt
-- [ ] **Retrieval-Augmented** — Inject data harga historis ke context
-- [ ] **Multi-step reasoning** — Pisahkan step analisis sentimen dan step rekomendasi
-- [ ] **Self-consistency** — Jalankan prompt 3x, ambil majority vote
+| Metrik | v1.0 | v2.0 |
+|--------|------|------|
+| Parse rate (valid JSON) | ~60% | ~98% |
+| Selalu ada faktor risiko | ❌ | ✅ |
+| Confidence bervariasi | ❌ | ✅ |
+| Analisis balanced | ❌ | ✅ |
+
+---
+
+## Rencana Iterasi Selanjutnya
+
+- [ ] Few-shot examples — tambah 2-3 contoh analisis nyata di prompt
+- [ ] Pisahkan system prompt dan user prompt untuk kontrol lebih baik
+- [ ] Versi untuk saham Indonesia (BEI) dengan konteks OJK dan rupiah

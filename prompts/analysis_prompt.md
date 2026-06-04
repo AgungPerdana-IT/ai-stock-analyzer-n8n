@@ -1,58 +1,78 @@
 # Analysis Prompt — Template & Variasi
-# Digunakan untuk kasus analisis spesifik
+# Untuk pasar saham AS (NYSE / NASDAQ)
 
 ---
 
-## Template 1: Analisis Berita Earnings
+## Template 1: Analisis Berita Earnings (US Stocks)
 
 Gunakan saat ada berita laporan keuangan (earnings release):
 
 ```
-Saham {kode_saham} baru saja merilis laporan keuangan {periode}.
+Kamu adalah analis saham Wall Street profesional.
+
+Saham {TICKER} baru saja merilis laporan keuangan {QUARTER} {YEAR}.
 
 Data keuangan utama:
-{data_keuangan}
+{DATA_KEUANGAN}
 
 Berita dan komentar analis:
-{berita}
+{BERITA}
 
-Bandingkan dengan ekspektasi pasar sebelumnya dan beri analisis singkat dampak ke harga saham dalam 1-5 hari ke depan. Output dalam format JSON standar.
+LANGKAH 1 - Analisis apakah hasil earnings ini beat, meet, atau miss ekspektasi konsensus.
+LANGKAH 2 - Kritik analisis kamu: apakah ada faktor one-time yang perlu dikeluarkan?
+LANGKAH 3 - Output FINAL dalam JSON murni:
+
+{"sentimen_pasar":"positif/negatif/netral","ringkasan":"2-3 kalimat","top_3_saham":[{"ticker":"XXXX","dampak":"positif/negatif/netral","alasan":"singkat"}],"saran_tindakan":{"aksi":"beli/jual/wait and see","alasan":"logis"},"confidence_level":"LOW/MEDIUM/HIGH"}
 ```
 
 ---
 
-## Template 2: Analisis Sentimen Makro
+## Template 2: Analisis Sentimen Makro AS
 
-Gunakan saat berita lebih ke makroekonomi (BI rate, inflasi, dll):
+Gunakan saat berita lebih ke makroekonomi (Fed rate decision, CPI, NFP, dll):
 
 ```
-Berikut adalah berita makroekonomi Indonesia yang relevan hari ini:
-{berita_makro}
+Kamu adalah analis makroekonomi dan strategi pasar senior.
 
-Analisis bagaimana berita ini berdampak ke sektor {sektor} secara umum, dan khususnya ke saham {kode_saham}. Pertimbangkan sensitivitas saham ini terhadap perubahan suku bunga / kurs / inflasi.
+Berikut adalah data/berita makroekonomi AS hari ini:
+{BERITA_MAKRO}
 
-Output JSON standar.
+LANGKAH 1 - Analisis implikasi berita ini terhadap pasar saham AS secara keseluruhan.
+LANGKAH 2 - Kritik: sektor mana yang paling terdampak positif dan negatif?
+LANGKAH 3 - Output FINAL JSON:
+
+{"sentimen_pasar":"positif/negatif/netral","ringkasan":"2-3 kalimat","top_3_saham":[{"ticker":"XXXX","dampak":"positif/negatif/netral","alasan":"kaitan ke makro"}],"saran_tindakan":{"aksi":"beli/jual/wait and see","alasan":"berbasis data makro"},"confidence_level":"LOW/MEDIUM/HIGH"}
 ```
 
 ---
 
-## Template 3: Analisis Sentimen Singkat (untuk Gemini Flash)
+## Template 3: Prompt Hemat Token (Gemini Flash)
 
-Versi hemat token untuk model yang lebih kecil:
+Versi ringkas untuk efisiensi biaya API:
 
 ```
-Berita: {berita}
-Saham: {kode_saham}
+Analis saham AS profesional. Berita: {BERITA}
 
-Tugas: Analisis sentimen berita ini terhadap saham di atas.
-Output JSON: {"saham":"...","skor_sentimen":<-10 to 10>,"rekomendasi":"BUY/HOLD/SELL","alasan":"...","confidence":"LOW/MEDIUM/HIGH"}
-HANYA JSON, tanpa teks lain.
+Analisis → Kritik → JSON final:
+{"sentimen_pasar":"...","ringkasan":"...","top_3_saham":[{"ticker":"...","dampak":"...","alasan":"..."}],"saran_tindakan":{"aksi":"...","alasan":"..."},"confidence_level":"..."}
+
+HANYA JSON. Mulai dengan '{'.
 ```
 
 ---
 
 ## Catatan Penggunaan
 
-- **Template 1** → Cocok untuk hari-hari sekitar RUPS atau earnings season
-- **Template 2** → Gunakan saat ada event makro besar (rapat BI, data inflasi, dll)  
-- **Template 3** → Gunakan jika budget API terbatas, hasilnya lebih simpel
+- **Template 1** → Earnings season (Jan, Apr, Jul, Oct) untuk saham AS
+- **Template 2** → Hari rilis data Fed, CPI, NFP, GDP
+- **Template 3** → Gunakan jika budget API terbatas, output lebih simpel
+
+## Contoh Ticker yang Sering Muncul
+
+| Sektor | Ticker Representatif |
+|--------|---------------------|
+| Tech | AAPL, MSFT, NVDA, GOOGL, META |
+| Finance | JPM, BAC, GS, MS, WFC |
+| Energy | XOM, CVX, COP |
+| Airlines | UAL, DAL, ALK, LUV |
+| ETF | SPY, QQQ, KRE, XLE, XLF |
